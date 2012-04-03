@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Unslider by visualidiot</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Unslider</h1>
+        <p>The simplest jQuery slider there is.</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/visualidiot/Unslider" class="button fork"><strong>Fork On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/visualidiot/Unslider/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/visualidiot/Unslider/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Unslider</h1>
+
+<h3>A jQuery slider that just slides.</h3>
+
+<p>If you want to have a quick, lightweight slider, with just the arrows and no fancy effects, then you'll love Unslider. Weighing in at 4kb uncompressed, and 1.9kb compressed, it's an incredibly lightweight solution.</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Slides a list</li>
+<li>Supports any HTML content (within a list item)</li>
+<li>Keyboard support</li>
+</ul><p>That's it!</p>
+
+<h2>Quickstart</h2>
+
+<p>To begin using Unslider, just include the files, and create a <code>div</code> with an unordered list (<code>ul</code>) inside.</p>
+
+<p>Pretty straightforward, and nice and semantic. Lovely. Now, we need a touch of CSS as well:
+<code>css
+.unslider {
+    overflow: hidden;
+}
+    .unslider ul {
+        position: relative;
+    }
+    .unslider li {
+        float: left;
+    }
+</code></p>
+
+<p><em>This is the same as the contents for unslider.css, so if you're including that file, don't add this CSS.</em></p>
+
+<p>Now that it's all set up, you just need to call the <code>unslider</code> method, with any options. They're optional, though, so you don't need to </p>
+
+<div class="highlight">
+<pre><span class="c1">//  Vanilla install</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#slider'</span><span class="p">).</span><span class="nx">unslider</span><span class="p">();</span>
+
+<span class="c1">//  And any options</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#slider'</span><span class="p">).</span><span class="nx">unslider</span><span class="p">({</span>
+    <span class="c1">//  Options go here.</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<h2>Options</h2>
+
+<p>It's also got a few options. Here are the defaults:</p>
+
+<div class="highlight">
+<pre><span class="p">{</span>
+    <span class="nx">activeClass</span><span class="o">:</span> <span class="s1">'active'</span><span class="p">,</span> <span class="c1">//  The class of the active slide</span>
+    <span class="nx">arrows</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">//  Choose whether to show the arrows in the markup or not</span>
+
+    <span class="c1">//  Speeds + timing</span>
+    <span class="nx">speed</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="nx">autoplay</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">//  Should the slider autoplay?</span>
+    <span class="nx">easing</span><span class="o">:</span> <span class="s1">'swing'</span><span class="p">,</span> <span class="c1">//  A jQuery easing string (see the Easing plugin for more: <a href="http://gsgd.co.uk/sandbox/jquery/easing/">http://gsgd.co.uk/sandbox/jquery/easing/</a>)</span>
+
+    <span class="c1">//  Callbacks</span>
+    <span class="nx">afterSlide</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">//  Called after a slide has occured.</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/visualidiot">visualidiot</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
