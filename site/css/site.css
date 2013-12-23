@@ -1,0 +1,82 @@
+/**
+ *   General type stuff
+ */
+body {
+	font: 15px/24px "Helvetica Neue", sans-serif;
+}
+
+h1, h2, h3 {
+	font-weight: 700;
+}
+	h1 {
+		font-size: 40px;
+		line-height: 48px;
+		
+		font-weight: 300;
+	}
+
+header, section, footer {
+	padding: 200px 0;
+}
+
+/**
+ *   First panel
+ */
+#top {
+	padding: 50px 0 80px;
+	
+	background: #355dba;
+	color: #122c76;
+}
+	#top nav {
+		overflow: hidden;
+		padding-bottom: 50px;
+	}
+		#top nav a {
+			float: right;
+			margin-left: 30px;
+			padding: 7px 24px;
+			
+			font-weight: 500;
+			font-size: 13px;
+			
+			color: #b3ccff;
+
+			border-radius: 50px;
+		}
+			#top nav a:hover {
+				background: #2f56b0;
+				color: #fff;
+			}
+		#top nav .download {
+			background: #173b8e;
+			color: #fff;
+			
+			font-weight: bold;
+		}
+			#top nav .download span {
+				padding-left: 5px;
+
+				color: #5e86e1;
+				font-weight: normal;
+			}
+			#top nav .download:hover {
+				background: #fff;
+				color: #173b8e;
+			}
+	#top .unslider {		
+		padding: 150px 0;
+		width: 100%;
+
+		border-radius: 10px;
+		
+		background: #3761c1;
+		
+		font-size: 19px;
+		line-height: 27px;	
+		text-align: center;
+	}
+		#top h1 {
+			padding-bottom: 8px;
+			color: #fff;
+		}
