@@ -1,0 +1,10 @@
+.unslider {
+	position: relative;
+	overflow: auto; /* This will get overriddden by the jQuery plugin. */
+}
+	.unslider li {
+		list-style: none;
+	}
+		.unslider ul li { /* Use the extra <ul> because <ol> gets used for the dot-nav. */
+			float: left;
+		}
