@@ -3,74 +3,163 @@
  */
 body {
 	font: 15px/24px "Helvetica Neue", sans-serif;
+	
+	color: #7a7470;
 }
 
 h1, h2, h3 {
-	font-weight: 700;
+	font-weight: 300;
+	color: #413c39;
 }
 	h1 {
 		font-size: 40px;
-		line-height: 48px;
-		
-		font-weight: 300;
+		line-height: 52px;
+	}
+	h2 {
+		font-size: 36px;
+		line-height: 44px;
 	}
 
 header, section, footer {
-	padding: 200px 0;
+	padding: 100px 0;
 }
+
+.btn {
+	display: block;
+	padding: 8px 25px;
+	margin: 15px 0;
+	
+	font-size: 13px;
+	text-align: left;
+	font-weight: 500;
+	
+	background: #f48642;
+	color: #fff;
+	
+	border-radius: 25px;
+}
+	.btn span {
+		float: right;
+		
+		font-size: 11px;
+		font-weight: normal;
+		opacity: .6;
+	}
+	.btn:hover, .btn:active {
+		background: #eb7a34;
+	}
+		.btn:active {
+			box-shadow: inset 0 1px 2px rgba(0,0,0,.12);
+		}
+	.btn.subdued {
+		background: #b1aa9c;
+	}
+		.btn.subdued:hover, .btn.subdued:active {
+			background: #a39c8b;
+		}
+	.download .btn:before {
+		content: '';
+		
+		display: inline-block;
+		width: 8px;
+		height: 10px;
+		margin-right: 8px;
+		margin-left: -4px;
+		
+		background: url('../img/download.png');
+		background-size: 100%;
+	}
 
 /**
  *   First panel
  */
 #top {
+	position: relative;
 	padding: 50px 0 80px;
 	
-	background: #355dba;
-	color: #122c76;
+	background: #f22e81;
+	background: linear-gradient(to bottom right, #f22e81, #fc904e);
+	
+	color: rgba(255,255,255,.6);
+	
+	box-shadow: inset 0 -2px 5px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.07);
 }
+	#top img, #top sup {
+		pointer-events: none;
+		-webkit-user-select: none;
+	}
+		#top sup {
+			position: relative;
+			left: 12px;
+			top: -4px;
+			
+			font-size: 12px;
+			font-weight: bold;
+			color: #ffa2c6;
+		}
 	#top nav {
-		overflow: hidden;
 		padding-bottom: 50px;
 	}
 		#top nav a {
 			float: right;
 			margin-left: 30px;
-			padding: 7px 24px;
+			padding: 7px 25px;
 			
 			font-weight: 500;
 			font-size: 13px;
 			
-			color: #b3ccff;
+			color: rgba(255,255,255,.8);
+			background: rgba(0,0,0,.05);
 
 			border-radius: 50px;
+			
+			-webkit-transition: background .2s, color .2s;
+			transition: background .2s, color .2s;
 		}
 			#top nav a:hover {
-				background: #2f56b0;
+				background: rgba(0,0,0,.1);
 				color: #fff;
 			}
-		#top nav .download {
-			background: #173b8e;
-			color: #fff;
+			#top nav a:active {
+				background: rgba(0,0,0,.1);
+				box-shadow: inset 0 2px 3px rgba(0,0,0,.1);
+			}
+		#top nav a.download {
+			position: relative;
+			
+			background: #fff;
+			color: #eb3f80;
 			
 			font-weight: bold;
 		}
-			#top nav .download span {
+			#top nav a.download span {
 				padding-left: 5px;
 
-				color: #5e86e1;
+				color: #ff85b3;
 				font-weight: normal;
 			}
-			#top nav .download:hover {
-				background: #fff;
-				color: #173b8e;
+			#top nav a.download:hover:after {
+				content: '';
+				position: absolute;
+				left: -5px;
+				right: -5px;
+				bottom: -8px;
+				top: -8px;
+				
+				border: 2px solid #fff;
+				border-radius: 50px;
+				
+				-webkit-animation: pulse 1.5s infinite;
+				animation: pulse 1.5s infinite;
 			}
-	#top .unslider {		
+	#top .unslider {
+		overflow: visible;	
 		padding: 150px 0;
 		width: 100%;
 
 		border-radius: 10px;
 		
-		background: #3761c1;
+		background: rgba(0,0,0,.2);
 		
 		font-size: 19px;
 		line-height: 27px;	
@@ -79,4 +168,97 @@ header, section, footer {
 		#top h1 {
 			padding-bottom: 8px;
 			color: #fff;
+		}
+		
+@-webkit-keyframes pulse {
+	from { opacity: .25; -webkit-transform: scale(1.05); }
+	50%, to { opacity: 0; -webkit-transform: scale(1.2); }
+}
+
+@keyframes pulse {
+	from { opacity: .25; transform: scale(1.05); }
+	50%, to { opacity: 0; transform: scale(1.2); }
+}
+
+		
+/**
+ *   Second panel
+ */
+#install {
+	background: #fff;
+}
+
+
+/**
+ *   Third panel
+ */
+#extras {
+	background: #f6f4f0;
+	
+	/* fancy gradient shit */
+	background: #f6f4f0 radial-gradient(farthest-side at center top, #dcd6ca 0%, #f6f4f0 35%) no-repeat 50% -140px;
+	background-size: 200% 100%;
+	
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+	
+	text-align: center;
+}
+	#extras h2 {
+		color: #827869;
+		margin-bottom: 60px;
+	}
+	#extras ul {
+		list-style: none;
+		overflow: hidden;
+	}
+		#extras li {
+			float: left;
+			width: 28%;
+			margin-right: 8%;
+		}
+			#extras li:last-child {
+				margin-right: 0;
+			}
+	#extras h3 {
+		display: block;
+		margin-bottom: 20px;
+		
+		color: #b6ac9e;
+
+		font-size: 13px;
+		line-height: 36px;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+		#extras h3:before {
+			content: '';
+			
+			display: block;
+			width: 48px;
+			height: 36px;
+			margin: 0 auto 10px;
+			
+			background: url('../img/infinite.png');
+			background-size: 48px 36px;
+		}
+			#extras .fade h3:before { background-image: url('../img/fade.png'); }
+			#extras .vertical h3:before { background-image: url('../img/vertical.png'); }
+			
+	#extras .unslider {
+		height: 80px;
+		margin: 30px 0;
+		
+		background: #ece8e1;
+		color: #aba393;
+		line-height: 80px;
+		
+		border-radius: 5px;
+		box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	}
+		#extras .unslider li {
+			margin: 0; /* fix offset */
+		}
+		#extras .unslider .halfling {
+			padding: 16px;
+			line-height: 24px;
 		}

@@ -9,11 +9,30 @@
 	box-sizing: border-box;
 }
 
+::selection {
+	background: #fa785b;
+	color: #fff;
+}
+
 a {
 	text-decoration: none;
 }
 
 .wrap {
-	width: 900px;
+	width: 940px;
 	margin: 0 auto;
+}
+
+@media (max-width: 1020px) {
+	.wrap {
+		width: 90%;
+	}
+}
+
+@media (max-width: 600px) {
+	#extras li {
+		float: none !important;
+		width: 100% !important;
+		margin: 0 0 90px !important;
+	}
 }

@@ -20,16 +20,19 @@
 		<header id="top">
 			<div class="wrap">
 				<nav>
-					<img id="logo" src="img/logo.png" alt="Unslider logo" width="34" height="27">
+					<img id="logo" src="img/logo.png" alt="Unslider" title="Unslider" width="34" height="27"><sup>2.0</sup>
 					
 					<a href="#download" class="download">Download <span>v1.1</span></a>
 					<a href="#extras">Extras</a>
 					<a href="#install">Install</a>
-					<a href="#demo">Demo</a>
 				</nav>
 				
-				<div class="unslider">
+				<div class="unslider unslider-demo">
 					<ul>
+						<li>
+							<h1>A super-simple slider plugin for jQuery</h1>
+							<p>Quick, easy, and responsive. Sets up in seconds.</p>
+						</li>
 						<li>
 							<h1>A super-simple slider plugin for jQuery</h1>
 							<p>Quick, easy, and responsive. Sets up in seconds.</p>
@@ -39,11 +42,101 @@
 			</div>
 		</header>
 		
+		<section id="install">
+			<div class="wrap">
+				<h2>Installing Unslider</h2>
+				
+				<p>Or not. Whatever.</p>
+			</div>
+		</section>
+		
+		<section id="extras">
+			<div class="wrap">
+				<h2>Optional extras</h2>
+				
+				<ul>
+					<li class="infinite">
+						<h3>Infinite Scroll</h3>
+						<p>Instead of moving back to the first and last slides, the Infinite Scroll extra lets the slidin’ keep going on. Forever and ever and ever.</p>
+						
+						<div class="unslider unslider-infinite">
+							<ul>
+								<li>Keep on runnin’</li>
+								<li>Keep on hidin’</li>
+								<li class="halfling">One fine day I’m gonna be the one to make you understand</li>
+								<li>Infinite scroll is the man</li>
+							</ul>
+						</div>
+						
+						<p class="download">
+							<a class="btn subdued" href="/download/infinite">Unslider + Infinite <span>standard, 12kb</span></a>
+							<a class="btn" href="/download/infinite.min">Unslider + Infinite <span>minified, 7kb</span></a>
+						</p>
+					</li>
+					
+					<li class="fade">
+						<h3>Fade Transition</h3>
+						<p>It might be called Un<em>slide</em>r, but thanks to the Fade extra, you can now use a lovely fade transition to switch between slides, too.</p>
+						
+						<div class="unslider unslider-fade">
+							<ul>
+								<li>Keep on runnin’</li>
+								<li>Keep on hidin’</li>
+								<li class="halfling">One fine day I’m gonna be the one to make you understand</li>
+								<li>Infinite scroll is the man</li>
+							</ul>
+						</div>
+						
+						<p class="download">
+							<a class="btn subdued" href="/download/fade">Unslider + Fade <span>standard, 11kb</span></a>
+							<a class="btn" href="/download/fade.min">Unslider + Fade <span>minified, 6.7kb</span></a>
+						</p>
+					</li>
+					
+					<li class="vertical">
+						<h3>Vertical Scroll</h3>
+						<p>As pop superstar Yazz once sang, the only way is up. Or down. Doesn’t matter. You can slide up and down with the Vertical Scroll extra.</p>
+						
+						<div class="unslider unslider-vertical">
+							<ul>
+								<li>Keep on runnin’</li>
+								<li>Keep on hidin’</li>
+								<li class="halfling">One fine day I’m gonna be the one to make you understand</li>
+								<li>Infinite scroll is the man</li>
+							</ul>
+						</div>
+						
+						<p class="download">
+							<a class="btn subdued" href="/download/vertical">Unslider + Vertical <span>standard, 11kb</span></a>
+							<a class="btn" href="/download/vertical.min">Unslider + Vertical <span>minified, 6.7kb</span></a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+		
+		<!-- Linking to jQuery -->
 		<script src="//code.jquery.com/jquery-latest.min.js"></script>
+		
+		<!-- Our Unslider script, lets the bare minimum work. -->
 		<script src="../src/unslider.js"></script>
+		
+		<!-- Optional extras: you don't need these for Unslider to work, but if you want infinite/fade/vertical extras, add 'em in. -->
+		<script src="../src/unslider.infinite.js"></script>
+		<script src="../src/unslider.fade.js"></script>
+		
+		<!-- Here's where I'm calling Unslider. You don't need to do all of these. -->
 		<script>
 			$(function() {
-				$('.unslider').unslider();
+				//  Default demo, no special features
+				$('.unslider-demo').unslider();
+				
+				//  Infinite scroll
+				//  Only works if you've got the unslider.infinite.js extra on the page too
+				$('.unslider-infinite').unslider({infinite: true});
+
+				//  Infinite scroll
+				$('.unslider-fade').unslider({fade: true});
 			});
 		</script>
 	</body>

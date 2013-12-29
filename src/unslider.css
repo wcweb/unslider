@@ -2,6 +2,9 @@
 	position: relative;
 	overflow: auto; /* This will get overriddden by the jQuery plugin. */
 }
+	.unslider ul {
+		position: relative;
+	}
 	.unslider li {
 		list-style: none;
 	}
