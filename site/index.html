@@ -115,6 +115,10 @@
 			</div>
 		</section>
 		
+		<section id="download">
+			download me pl0z
+		</section>
+		
 		<!-- Linking to jQuery -->
 		<script src="//code.jquery.com/jquery-latest.min.js"></script>
 		
@@ -137,6 +141,12 @@
 
 				//  Infinite scroll
 				$('.unslider-fade').unslider({fade: true});
+				
+				//  And this is smooth scroll stuff.
+				//  You can ignore this, it doesn't affect Unslider in any way.
+				$('a[href^="#"]').click(function() {
+					return !$('html,body').animate({scrollTop: $(document).height()}, 400);
+				});
 			});
 		</script>
 	</body>
