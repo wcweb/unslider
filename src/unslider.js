@@ -84,6 +84,11 @@
         		width: (100 / this.total) + '%'
         	});
         	
+        	//  First slide doesn't auto-active
+        	if(!this.slides.filter('.active').length) {
+        		this.slides.filter('li:eq(' + this.index + ')').addClass('active');
+        	}
+        	
         	//  Listen to any post-build hooks
         	return $.Unslider.hook.register('build', {
         		context: this,
@@ -126,10 +131,7 @@
             //  And move it
             if(!self.items.queue('fx').length) {
                 //  Update the active classes
-                var active = self.items.find('li:eq(' + self.index + ')').addClass('active');
-                
-                //  Make sure we don't have more than one active slide
-                active.siblings().removeClass('active');
+                target.addClass('active').siblings().removeClass('active');
                     
                 //  Calculate the offset to move to
                 var offset = -(self.index * 100) + '%';
@@ -140,7 +142,7 @@
                		params: [target],
                		fallback: function() {
 	               		self.items.animate({left: offset}, self.opts.speed, function() {
-	               		    return $.callback(self.opts.complete, active, self.el, self.index);
+	               		    return $.callback(self.opts.complete, target, self.el, self.index);
 	               		});
                		}
                	});
