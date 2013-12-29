@@ -139,7 +139,7 @@
                 //  Listen to custom animations
                	hook = $.Unslider.hook.register('move', {
                		context: self,
-               		params: [target],
+               		params: [offset,target],
                		fallback: function() {
 	               		self.items.animate({left: offset}, self.opts.speed, function() {
 	               		    return $.callback(self.opts.complete, target, self.el, self.index);

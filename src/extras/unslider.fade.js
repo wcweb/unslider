@@ -27,14 +27,20 @@
 	});
     
     //  We're not sliding anything so piss about with the opacities
-    $.Unslider.hook.bind('move', function() {
+    $.Unslider.hook.bind('move', function(offset,target) {
     	if(typeof this.opts['fade'] == 'undefined') return;
     	
-    	return this.slides.filter('.active').animate({opacity: 1}, this.opts.speed)
-    			   .siblings().animate({opacity: 0}, this.opts.speed);
+    	var self = this;
+    	var active = this.slides.filter('.active')
     	
-    	//return this.items.animate({
-    	//	opacity: 0
-    	//}, 150).delay(250).animate({opacity: 1}, 150);
+    	//  Make the current slide appear
+    	active.animate({opacity: 1}, this.opts.speed, function() {
+    		return $.callback(self.opts.complete, target, self.el, self.index);
+    	});
+    	
+    	//  And the other slides disappear
+    	active.siblings().animate({opacity: 0}, this.opts.speed);
+    	
+    	return active;
     });
 })(window.jQuery);

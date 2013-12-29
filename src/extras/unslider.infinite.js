@@ -3,8 +3,46 @@
  *   (Default functionality is to move back to the first slide)
  */
 (function($) {
-    $.Unslider.hook.bind('move', function() {
+	$.Unslider.hook.bind('build', function() {
     	if(typeof this.opts['infinite'] == 'undefined') return;
-    	return;
+
+		//  Cache the slides because we're gonna use this a lot
+		var slides = this.slides;
+		
+		//  Double up on first and last slides
+		this.items.prepend(slides.last().clone().attr('class', 'cloned'));
+		this.items.append(slides.first().clone().attr('class', 'cloned'));
+		
+		this.total = this.total + 2;
+		
+		//  Auto-hide the first slide
+		this.index = 1;
+		this.items.css({
+			width: this.total * 100 + '%',
+			left: '-100%'
+		});
+				
+		return this.el.find('ul li').css('width', (100 / this.total) + '%');
+	});
+    
+    $.Unslider.hook.bind('move', function(offset,target) {
+    	if(typeof this.opts['infinite'] == 'undefined') return;
+    	
+    	//  Cache for jQuery animate
+    	var self = this;
+    	
+    	//  Account for the first slide
+    	if(this.index <= 0) {
+    		this.index = 1;
+    	}
+    	
+    	return self.items.animate({left: offset}, self.opts.speed, function() {
+    		if(self.index + 1 == self.total) {
+    			self.index = 1;
+    			self.items.css('left', '-100%');
+    		}
+    	    
+    	    return $.callback(self.opts.complete, target, self.el, self.index);
+    	});
     });
 })(window.jQuery);
