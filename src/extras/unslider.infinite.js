@@ -16,13 +16,23 @@
 		this.total = this.total + 2;
 		
 		//  Auto-hide the first slide
-		this.index = 1;
 		this.items.css({
 			width: this.total * 100 + '%',
 			left: '-100%'
 		});
 				
 		return this.el.find('ul li').css('width', (100 / this.total) + '%');
+	});
+	
+	
+	$.Unslider.hook.bind('handleDots', function() {
+		if(typeof this.opts['infinite'] == 'undefined') return;
+		return this + 1;
+	});
+	
+	$.Unslider.hook.bind('update', function(to) {
+		if(typeof this.opts['infinite'] == 'undefined') return;
+		return to;
 	});
     
     $.Unslider.hook.bind('move', function(offset,target) {

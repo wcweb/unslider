@@ -24,7 +24,7 @@
 	});
     
     //  We're not sliding anything so piss about with the opacities
-    $.Unslider.hook.bind('move', function(offset,target) {
+    $.Unslider.hook.bind('move', function(offset, target) {
     	if(typeof this.opts['vertical'] == 'undefined') return;
     	
     	//  Cache the "this" variable because jQuery animate changes context

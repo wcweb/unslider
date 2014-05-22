@@ -32,7 +32,7 @@
                 
         //  Set a default object to merge with the opts object.
         //  Don't ever call this.defaults, call this.opts instead.
-        this.defaults = {
+        $.Unslider.defaults = this.defaults = {
             //  How fast to move between slides (in ms)
             speed: 500,
             
@@ -54,7 +54,7 @@
             //  If you want to style the dots, you'll need to write
             //  some custom CSS to do that. It doesn't come included with
             //  Unslider, to keep things small.
-            dots: true,
+            dots: false,
             
             //  Want the slider to start automatically? We can do that.
             autostart: true
@@ -73,27 +73,108 @@
         var self = this;
         
         this.build = function() {
-        	this.el.css('overflow', 'hidden');
+        	this.el.addClass('unslider').css('overflow', 'hidden');
         	
         	//  Turn off the auto overflow
         	this.items.css('width', this.total * 100 + '%');
         	
         	//  Set the slide's widths
-        	this.slides.css({
-        		float: 'left',
-        		width: (100 / this.total) + '%'
-        	});
+        	this.slides.css('width', (100 / this.total) + '%');
+        	
+        	//  Build dots
+        	this.opts.dots && this.buildDots();
+        	
+        	//  Build arrow navigation
+        	this.opts.arrows && this.buildArrows();
+        	
+        	//  Handle keyboard navigation
+        	this.opts.keys && this.handleKeys();
         	
         	//  First slide doesn't auto-active
         	if(!this.slides.filter('.active').length) {
         		this.slides.filter('li:eq(' + this.index + ')').addClass('active');
         	}
         	
+        	//  Update any custom hooks
+        	this.update(this.index);
+        	
         	//  Listen to any post-build hooks
         	return $.Unslider.hook.register('build', {
         		context: this,
         		params: [],
         		fallback: this
+        	});
+        };
+        
+        //  Create navigation dots
+        //  Use data-title attributes on the slides to change the value
+        this.buildDots = function() {
+        	var html = '<ol class="dots">';
+        	var target = this.findDots();
+        	
+        	//  Add our dots to the HTML string
+        	this.slides.not('.cloned').each(function(index) {
+        		html += '<li>' + ($(this).attr('data-title') || index + 1) + '</li>';
+        	});
+        	
+        	//  Finish the string off and add to wherever we're putting the dots
+        	target.append(html + '</ol>');
+        	
+        	//  Listen for clicking the dots
+        	this.handleDots();
+        	
+        	//  Handle any plugins
+        	return $.Unslider.hook.register('buildDots', {
+        		context: target,
+        		params: [html],
+        		fallback: false
+        	});
+        };
+        
+        //  Listen to dot-clicking
+        this.handleDots = function() {
+        	var me = this;
+        	var target = me.findDots();
+        	
+        	//  Listen for any <li>s in .dots
+        	return target.find('.dots li').on('click', function() {
+        		var index = $(this).index();
+        		var offset = $.Unslider.hook.register('handleDots', {
+        			context: index, fallback: index
+        		});
+        		
+        		//  $(this).index() matches the slide indexes
+        		me.move(offset);
+        	});
+        };
+        
+        //  Find our dots even if they're not part of the normal
+        //  Unslider DOM object
+        this.findDots = function() {
+        	var target = this.opts.dots;
+        	
+        	//  If there's no custom target set in the options,
+        	//  fall back to the main Unslider element
+        	if(target === true) {
+        		target = this.el;
+        	}
+        	
+        	return target;
+        };
+        
+        //  Listen to keyboard navigation
+        this.handleKeys = function() {
+        	var map;
+        	
+        	return $(document).on('keydown', function(e) {
+        		map = {
+        			37: self.index - 1,
+        			39: self.index + 1
+        		};
+        		
+        		if(map[e.which]) {
+	        		return self.move(map[e.which]);
+	        	}
         	});
         };
         
@@ -117,29 +198,49 @@
             });
         };
         
+        //  Runs every time Unslider gets updated.
+        //  Doesn't *move* the slider, just takes care of updating
+        //  the internal index and the dots
+        this.update = function(to) {
+        	//  Get any pre-update 
+        	var preUpdate = $.Unslider.hook.register('update', {
+        		context: self,
+        		params: [to]
+        	});
+        	
+        	//  Set the new target element
+        	var target = self.find(to);
+        	
+        	//  Update our index so we know what slide's active
+        	//  Listen to the preUpdate plugin first though
+        	self.index = $.isNumeric(preUpdate) ? preUpdate : target.index();
+        	
+        	//  Update dots
+        	if(self.opts.dots) {
+        		var dots = self.findDots();
+        		
+        		dots.find('.dots li:eq(' + self.index + ')').addClass('active')
+        			.siblings().removeClass('active');
+        	}
+        	
+        	return target.addClass('active').siblings().removeClass('active');
+        };
+        
         //  Move a slide to an index
         this.move = function(to) {
         	//  Listen to custom hooks
         	var hook;
-        	
-            //  Set the new target element
-            var target = self.find(to);
-            
-            //  Update our index so we know what slide's active
-            self.index = target.index();
-            
+        	var target = self.update(to);
+
             //  And move it
-            if(!self.items.queue('fx').length) {
-                //  Update the active classes
-                target.addClass('active').siblings().removeClass('active');
-                    
+            if(!self.items.queue('fx').length) {                                    
                 //  Calculate the offset to move to
                 var offset = -(self.index * 100) + '%';
                 
                 //  Listen to custom animations
                	hook = $.Unslider.hook.register('move', {
                		context: self,
-               		params: [offset,target],
+               		params: [offset, target],
                		fallback: function() {
 	               		self.items.animate({left: offset}, self.opts.speed, function() {
 	               		    return $.callback(self.opts.complete, target, self.el, self.index);
