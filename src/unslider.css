@@ -7,6 +7,12 @@
 	}
 	.unslider li {
 		list-style: none;
+		
+		/* Reset any weird spacing */
+		margin: 0;
+		padding: 0;
+		
+		border: none;
 	}
 		.unslider ul li { /* Use the extra <ul> because <ol> gets used for the dot-nav. */
 			float: left;

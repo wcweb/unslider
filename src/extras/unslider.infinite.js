@@ -3,6 +3,19 @@
  *   (Default functionality is to move back to the first slide)
  */
 (function($) {
+	var total;
+	var calculate = function(index) {
+		if(index < 1) {
+			return 1;
+		}
+		
+		if(index > (total - 1)) {
+			return total - 1;
+		}
+		
+		return index;
+	};
+	
 	$.Unslider.hook.bind('build', function() {
     	if(typeof this.opts['infinite'] == 'undefined') return;
 
@@ -13,7 +26,11 @@
 		this.items.prepend(slides.last().clone().attr('class', 'cloned'));
 		this.items.append(slides.first().clone().attr('class', 'cloned'));
 		
+		//  Change the total
 		this.total = this.total + 2;
+		
+		//  Set the default index to not be the buffer slides
+		this.index = 1;
 		
 		//  Auto-hide the first slide
 		this.items.css({
@@ -25,14 +42,14 @@
 	});
 	
 	
-	$.Unslider.hook.bind('handleDots', function() {
+	$.Unslider.hook.bind('handleDots', function(index) {
 		if(typeof this.opts['infinite'] == 'undefined') return;
-		return this + 1;
+		return index + 1;
 	});
 	
 	$.Unslider.hook.bind('update', function(to) {
 		if(typeof this.opts['infinite'] == 'undefined') return;
-		return to;
+		console.log(this.index);
 	});
     
     $.Unslider.hook.bind('move', function(offset,target) {

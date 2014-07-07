@@ -12,7 +12,9 @@
 		//  Make sure we're wrapped to the container
 		this.items.css({
 			position: 'relative',
-			height: '100%' // position: absolute kills height calculation
+			height: Math.max.apply(null, this.slides.map(function() {
+				return $(this).height();
+			}).get())
 		});
 		
 		//  And put all our slides on top of each other
