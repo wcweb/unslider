@@ -246,6 +246,9 @@
 			   		params: [offset, target],
 			   		fallback: function() {
 				   		self.animate(self.items, {left: offset}, self.opts.speed, function() {
+				   			//  Restart the slider
+				   			self.opts.autostart && self.start();
+				   			
 				   			return $.callback(self.opts.complete, target, self.el, self.index);
 				   		});
 			   		}
