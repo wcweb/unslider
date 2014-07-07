@@ -49,7 +49,7 @@
 	
 	$.Unslider.hook.bind('update', function(to) {
 		if(typeof this.opts['infinite'] == 'undefined') return;
-		console.log(this.index);
+		return to;
 	});
     
     $.Unslider.hook.bind('move', function(offset,target) {
@@ -63,7 +63,7 @@
     		this.index = 1;
     	}
     	
-    	return self.items.animate({left: offset}, self.opts.speed, function() {
+    	return self.animate(self.items, {left: offset}, self.opts.speed, function() {
     		if(self.index + 1 == self.total) {
     			self.index = 1;
     			self.items.css('left', '-100%');

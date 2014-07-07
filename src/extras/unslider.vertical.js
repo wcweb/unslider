@@ -31,7 +31,7 @@
     	var self = this;
     	
     	//  Move vertically
-    	return this.items.animate({top: offset}, this.opts.speed, function() {
+    	return self.animate(self.items, {top: offset}, this.opts.speed, function() {
 	    	return $.callback(self.opts.complete, target, self.el, self.index);
     	});
     });

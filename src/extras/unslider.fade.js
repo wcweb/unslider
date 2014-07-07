@@ -36,12 +36,12 @@
     	var active = this.slides.filter('.active')
     	
     	//  Make the current slide appear
-    	active.animate({opacity: 1}, this.opts.speed, function() {
+    	self.animate(active, {opacity: 1}, this.opts.speed, function() {
     		return $.callback(self.opts.complete, target, self.el, self.index);
     	});
     	
     	//  And the other slides disappear
-    	active.siblings().animate({opacity: 0}, this.opts.speed);
+    	self.animate(active.siblings(), {opacity: 0}, this.opts.speed);
     	
     	return active;
     });
