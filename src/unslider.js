@@ -85,9 +85,6 @@
 			//  Build dots
 			this.opts.dots && this.buildDots();
 			
-			//  Build arrow navigation
-			this.opts.arrows && this.buildArrows();
-			
 			//  Handle keyboard navigation
 			this.opts.keys && this.handleKeys();
 			
@@ -98,6 +95,28 @@
 			return $.Unslider.hook.register('build', {
 				context: this,
 				params: [],
+				fallback: this
+			});
+		};
+		
+		//  Stop and reset Unslider the way it was before.
+		this.destroy = function() {
+			//  Reset the slider class
+			this.el.removeClass('unslider');
+			
+			//  Reset the slider width
+			this.items.css('width', 'auto');
+			this.slides.css('width', 'auto');
+			
+			//  Remove the dots
+			this.findDots().find('.dots').remove();
+			
+			//  Remove key support
+			$(document).off('keydown', '#unslider');
+			
+			//  Listen to any post-build hooks
+			return $.Unslider.hook.register('destroy', {
+				context: this,
 				fallback: this
 			});
 		};
@@ -156,7 +175,7 @@
 		this.handleKeys = function() {
 			var map;
 			
-			return $(document).on('keydown', function(e) {
+			return $(document).on('keydown', '#unslider', function(e) {
 				map = {
 					37: self.index - 1, 39: self.index + 1
 				};
