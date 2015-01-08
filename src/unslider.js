@@ -28,7 +28,8 @@
 			items: '>ul',   // slides container selector
 			item: '>li',    // slidable items selector
 			easing: 'swing',// easing function to use for animation
-			autoplay: true  // enable autoplay on initialisation
+			autoplay: true,  // enable autoplay on initialisation
+			albums:[]
 		};
 
 		_.init = function(el, o) {
@@ -48,6 +49,7 @@
 				if (height > _.max[1]) _.max[1] = height;
 			});
 
+			_.albums = _.o.albums;
 
 			//  Cached vars
 			var o = _.o,
@@ -130,9 +132,7 @@
 					}
 				}).on('move', function(e) {
 					var left = 100 * e.distX / el.width();
-				        var leftDelta = 100 * e.deltaX / el.width();
-					_.ul[0].style.left = parseInt(_.ul[0].style.left.replace("%", ""))+leftDelta+"%";
-
+					_.ul.css("left", el.data("left") + left + "%");
 					_.ul.data("left", left);
 				}).on('moveend', function(e) {
 					var left = _.ul.data("left");
@@ -179,12 +179,19 @@
 			if (!ul.queue('fx').length) {
 				//  Handle those pesky dots
 				el.find('.dot').eq(index).addClass('active').siblings().removeClass('active');
+				if( 0 !== index ){
+					el.animate(obj, speed, easing) && ul.animate($.extend({left: '-' + index + '00%'}, obj), speed, easing, function(data) {
+						_.i = index;
 
-				el.animate(obj, speed, easing) && ul.animate($.extend({left: '-' + index + '00%'}, obj), speed, easing, function(data) {
+						$.isFunction(o.complete) && !callback && o.complete(el, target);
+					});
+				}else{
+					ul.offset({left:0});
 					_.i = index;
 
 					$.isFunction(o.complete) && !callback && o.complete(el, target);
-				});
+				}
+				
 			};
 		};
 
@@ -215,7 +222,7 @@
 			if (name == 'dot') {
 				html = '<ol class="dots">';
 					$.each(_.li, function(index) {
-						html += '<li class="' + (index == _.i ? name + ' active' : name) + '">' + ++index + '</li>';
+						html += '<li class="' + (index == _.i ? name + ' active' : name) + '">' + '<img src="'+ _.albums[index]+'" class="slider-thumb" />' + '</li>';
 					});
 				html += '</ol>';
 			} else {
